@@ -4,7 +4,8 @@
             [quil.middleware :as m]
             [clojure.core.async :as async]
             [clojure-ladder.core :as core]
-            [clojure-ladder.io :as io]))
+            [clojure-ladder.io :as io]
+            [clojure.string :as str]))
 
 (def sim-state (atom (core/init-sim-state)))
 
@@ -201,7 +202,11 @@
     ;; Simulation info
     (q/fill 0)
     (q/text-align :right :center)
-    (q/text (str "Simulation time: " (format "%.1f" (:sim-time @sim-state)) "s")
+    (q/text (str "Simulation time: "
+                 (if-let [t (:sim-time @sim-state)]
+                   (format "%.1f" (float t))
+                   "0.0")
+                 "s")
             (- (q/width) 20) (+ panel-y (/ height 2)))))
 
 (defn draw-menus []
@@ -398,7 +403,7 @@
         (start-simulation state))
       
       ;; S key to step simulation
-      (= (clojure.string/lower-case (str key-char)) "s")
+      (= (str/lower-case (str key-char)) "s")
       (step-simulation state)
       
       ;; Default - no action

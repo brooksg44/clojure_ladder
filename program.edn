@@ -1,0 +1,13 @@
+ClojureLadder Program Export
+==========================
+
+Rung 1:
+  - input: input1
+  - contact: input1, Normally Open
+  - output: output1
+
+Rung 2:
+  - input: input2
+  - contact: input2, Normally Open
+  - timer: timer1, Preset: 5
+
