@@ -6,7 +6,9 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [org.clojure/spec.alpha "0.3.218"]
                  [quil "4.3.1563"]
-                 [org.clojure/core.async "1.6.673"]]
+                 [org.clojure/core.async "1.6.673"]
+                 [org.clojure/data.json "2.4.0"]
+                 [org.clojure/tools.cli "1.0.219"]]
   :main ^:skip-aot clojure-ladder.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all

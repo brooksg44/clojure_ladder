@@ -2,6 +2,7 @@
 ;; Core namespace with specs, data structures, and evaluation logic
 
 (ns clojure-ladder.core
+  (:gen-class)
   (:require [clojure.spec.alpha :as s]
             [quil.core :as q]
             [quil.middleware :as m]))
