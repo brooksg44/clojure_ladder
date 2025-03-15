@@ -70,7 +70,7 @@
     ;; Semi-transparent background
     (q/fill 0 0 0 150)
     (q/rect 0 0 width height)
-    
+
     ;; Menu panel
     (q/fill 240)
     (q/stroke 180)
@@ -84,7 +84,7 @@
     (q/fill 200 220 255)
     (q/fill 220))
   (q/rect x y width height 5)
-  
+
   (q/fill 0)
   (q/text-align :center :center)
   (q/text text (+ x (/ width 2)) (+ y (/ height 2))))
@@ -94,7 +94,7 @@
   (q/stroke-weight 1)
   (q/fill 255)
   (q/rect x y width height 5)
-  
+
   (q/fill 0)
   (q/text-align :left :center)
   (q/text text (+ x 10) (+ y (/ height 2))))
@@ -110,16 +110,16 @@
         button-height 40
         button-x (+ panel-x (/ panel-width 2) (/ button-width -2))
         button-spacing 50]
-    
+
     (draw-menu-background)
-    
+
     ;; Title
     (q/fill 0)
     (q/text-size 24)
     (q/text-align :center :center)
     (q/text "ClojureLadder" (+ panel-x (/ panel-width 2)) (+ panel-y 30))
     (q/text-size 12)
-    
+
     ;; Menu buttons
     (draw-button button-x (+ panel-y 80) button-width button-height "New Program" false)
     (draw-button button-x (+ panel-y 80 button-spacing) button-width button-height "Load Program" false)
@@ -137,9 +137,9 @@
         input-width 300
         button-width 100
         button-height 40]
-    
+
     (draw-menu-background)
-    
+
     ;; Title
     (q/fill 0)
     (q/text-size 18)
@@ -148,14 +148,14 @@
               :save "Save Program"
               :load "Load Program"
               :export "Export Program"
-              "File Dialog") 
+              "File Dialog")
             (+ panel-x (/ panel-width 2)) (+ panel-y 30))
     (q/text-size 12)
-    
+
     ;; Filename input
     (q/text "Filename:" (+ panel-x 80) (+ panel-y 100))
     (draw-input-field (+ panel-x 80) (+ panel-y 120) input-width 30 (:filename @menu-state))
-    
+
     ;; Buttons
     (draw-button (+ panel-x 80) (+ panel-y 170) button-width button-height "OK" false)
     (draw-button (+ panel-x 80 button-width 20) (+ panel-y 170) button-width button-height "Cancel" false)))
@@ -168,13 +168,13 @@
           msg-height 40
           msg-x (- (/ width 2) (/ msg-width 2))
           msg-y 50]
-      
+
       ;; Draw message box
       (q/fill 250 250 220)
       (q/stroke 200 200 150)
       (q/stroke-weight 2)
       (q/rect msg-x msg-y msg-width msg-height 10)
-      
+
       ;; Draw message text
       (q/fill 0)
       (q/text-align :center :center)
@@ -186,19 +186,19 @@
         button-height 30
         panel-x 10
         panel-y (- (q/height) height 10)]
-    
+
     ;; Panel background
     (q/fill 240)
     (q/stroke 200)
     (q/stroke-weight 1)
     (q/rect panel-x panel-y (- (q/width) 20) height 5)
-    
+
     ;; Control buttons
     (draw-button (+ panel-x 10) (+ panel-y 5) button-width button-height "Menu" false)
     (draw-button (+ panel-x 10 (* 1 (+ button-width 10))) (+ panel-y 5) button-width button-height "Run" false)
     (draw-button (+ panel-x 10 (* 2 (+ button-width 10))) (+ panel-y 5) button-width button-height "Stop" false)
     (draw-button (+ panel-x 10 (* 3 (+ button-width 10))) (+ panel-y 5) button-width button-height "Step" false)
-    
+
     ;; Simulation info
     (q/fill 0)
     (q/text-align :right :center)
@@ -233,38 +233,38 @@
         button-height 40
         button-x (+ panel-x (/ panel-width 2) (/ button-width -2))
         button-spacing 50]
-    
+
     (cond
       ;; New Program button
       (check-button-click x y button-x (+ panel-y 80) button-width button-height)
       (do
         (hide-menu)
         (assoc state :program [] :global-state {}))
-      
+
       ;; Load Program button
       (check-button-click x y button-x (+ panel-y 80 button-spacing) button-width button-height)
       (do
         (swap! menu-state assoc :current-menu :file-dialog :file-dialog-type :load)
         state)
-      
+
       ;; Save Program button
       (check-button-click x y button-x (+ panel-y 80 (* button-spacing 2)) button-width button-height)
       (do
         (swap! menu-state assoc :current-menu :file-dialog :file-dialog-type :save)
         state)
-      
+
       ;; Export Program button
       (check-button-click x y button-x (+ panel-y 80 (* button-spacing 3)) button-width button-height)
       (do
         (swap! menu-state assoc :current-menu :file-dialog :file-dialog-type :export)
         state)
-      
+
       ;; Close Menu button
       (check-button-click x y button-x (+ panel-y 80 (* button-spacing 4)) button-width button-height)
       (do
         (hide-menu)
         state)
-      
+
       :else state)))
 
 (defn handle-file-dialog-click [state x y]
@@ -276,7 +276,7 @@
         panel-height (/ height 2)
         button-width 100
         button-height 40]
-    
+
     (cond
       ;; OK button
       (check-button-click x y (+ panel-x 80) (+ panel-y 170) button-width button-height)
@@ -300,13 +300,13 @@
           (do
             (hide-menu)
             state)))
-      
+
       ;; Cancel button
       (check-button-click x y (+ panel-x 80 button-width 20) (+ panel-y 170) button-width button-height)
       (do
         (hide-menu)
         state)
-      
+
       :else state)))
 
 (defn handle-control-panel-click [state x y]
@@ -315,26 +315,26 @@
         button-height 30
         panel-x 10
         panel-y (- (q/height) height 10)]
-    
+
     (cond
       ;; Menu button
       (check-button-click x y (+ panel-x 10) (+ panel-y 5) button-width button-height)
       (do
         (show-menu :main)
         state)
-      
+
       ;; Run button
       (check-button-click x y (+ panel-x 10 (* 1 (+ button-width 10))) (+ panel-y 5) button-width button-height)
       (start-simulation state)
-      
+
       ;; Stop button
       (check-button-click x y (+ panel-x 10 (* 2 (+ button-width 10))) (+ panel-y 5) button-width button-height)
       (stop-simulation state)
-      
+
       ;; Step button
       (check-button-click x y (+ panel-x 10 (* 3 (+ button-width 10))) (+ panel-y 5) button-width button-height)
       (step-simulation state)
-      
+
       :else state)))
 
 (defn handle-ui-mouse-click [state x y]
@@ -345,15 +345,15 @@
       :main (handle-main-menu-click state x y)
       :file-dialog (handle-file-dialog-click state x y)
       state)
-    
+
     ;; Handle toolbar clicks (top 30px)
     (< y 30)
     (core/mouse-pressed state {:x x :y y})
-    
+
     ;; Handle control panel clicks (bottom of screen)
     (> y (- (q/height) 50))
     (handle-control-panel-click state x y)
-    
+
     ;; Handle canvas clicks
     :else
     (core/mouse-pressed state {:x x :y y})))
@@ -363,10 +363,10 @@
 (defn key-pressed [state event]
   (let [key-code (:key-code event)
         key-char (:key event)]
-    
+
     (cond
       ;; If file dialog is active, update filename
-      (and (:active @menu-state) 
+      (and (:active @menu-state)
            (= :file-dialog (:current-menu @menu-state)))
       (case key-code
         ;; Backspace
@@ -375,9 +375,9 @@
               (swap! menu-state update :filename #(subs % 0 (dec (count %)))))
             state)
         ;; Enter
-        13 (handle-file-dialog-click state 
-                                    (+ (/ (q/width) 4) 80) 
-                                    (+ (/ (q/height) 4) 170))
+        13 (handle-file-dialog-click state
+                                     (+ (/ (q/width) 4) 80)
+                                     (+ (/ (q/height) 4) 170))
         ;; Escape
         27 (do
              (hide-menu)
@@ -387,7 +387,7 @@
           (when (and (not= key-char :key-coded) (< (count (:filename @menu-state)) 30))
             (swap! menu-state update :filename #(str % key-char)))
           state))
-      
+
       ;; Escape key to show menu
       (= key-code 27)
       (do
@@ -395,17 +395,17 @@
           (hide-menu)
           (show-menu :main))
         state)
-      
+
       ;; Space bar to pause/resume simulation
       (= key-code 32)
       (if (:auto-run state)
         (stop-simulation state)
         (start-simulation state))
-      
+
       ;; S key to step simulation
       (= (str/lower-case (str key-char)) "s")
       (step-simulation state)
-      
+
       ;; Default - no action
       :else state)))
 
@@ -419,7 +419,7 @@
 
 (defn draw-ui [state]
   (q/background 255)
-  (core/draw-state state)
+  (core/draw-state #p state)
   (draw-control-panel)
   (draw-menus)
   (draw-message))
