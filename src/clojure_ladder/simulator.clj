@@ -415,7 +415,7 @@
   (update-message-timer)
   (if (:active @menu-state)
     state  ; Don't update simulation if menu is active
-    (core/update-sim-state #p state)))
+    (core/update-sim-state state)))
 
 (defn draw-ui [state]
   (q/background 255)
