@@ -180,7 +180,7 @@
       (q/text-align :center :center)
       (q/text message (/ width 2) (+ msg-y (/ msg-height 2))))))
 
-(defn draw-control-panel []
+(defn draw-control-panel [state]
   (let [height 40
         button-width 100
         button-height 30
@@ -203,7 +203,7 @@
     (q/fill 0)
     (q/text-align :right :center)
     (q/text (str "Simulation time: "
-                 (if-let [t (:sim-time @sim-state)]
+                 (if-let [t (:sim-time state)]
                    (format "%.1f" (float t))
                    "0.0")
                  "s")
@@ -415,12 +415,12 @@
   (update-message-timer)
   (if (:active @menu-state)
     state  ; Don't update simulation if menu is active
-    (core/update-sim-state state)))
+    (core/update-sim-state #p state)))
 
 (defn draw-ui [state]
   (q/background 255)
-  (core/draw-state #p state)
-  (draw-control-panel)
+  (core/draw-state state)
+  (draw-control-panel state)
   (draw-menus)
   (draw-message))
 
