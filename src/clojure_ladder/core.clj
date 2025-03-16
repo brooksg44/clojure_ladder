@@ -282,12 +282,13 @@
     
     ;; Draw normally open/closed symbol
     (if normally-open
-      (do  ;; Draw open contact (--|  |--)
+      (do  ;; Draw open contact (--|  |--) 
         (q/line (+ x 20) (+ y (/ height 2) -5) (+ x width -20) (+ y (/ height 2) 5))
-        (q/line (+ x 20) (+ y (/ height 2) 5) (+ x width -20) (+ y (/ height 2) -5)))
+        (q/line (+ x 25) (+ y (/ height 2) -5) (+ x width -15) (+ y (/ height 2) 5)))
       (do  ;; Draw closed contact (--|/|--)
-        (q/line (+ x 20) (+ y (/ height 2) -5) (+ x width -20) (+ y (/ height 2) 5))))
-    
+        (q/line (+ x 20) (+ y (/ height 2) -5) (+ x width -20) (+ y (/ height 2) 5)) 
+        (q/line (+ x 25) (+ y (/ height 2) 5) (+ x width -15) (+ y (/ height 2) -5))
+        (q/line (+ x 25) (+ y (/ height 2) -5) (+ x width -25) (+ y (/ height 2) 5))))
     ;; Show active state
     (when state
       (q/fill 0 255 0 100)
@@ -473,7 +474,7 @@
         input2 (create-input :input2 40 120 false)
         contact2 (create-contact :input2 120 120 true)
         timer1 (create-timer :timer1 200 120 5)]
-    [[input1 contact1 output1]
+    [[input1 contact1 contact2 output1]
      [input2 contact2 timer1]]))
 
 ;; ---- Main Sketch ----
